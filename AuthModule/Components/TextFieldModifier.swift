@@ -20,6 +20,6 @@ struct TextFieldModifier: ViewModifier {
             .padding(3)
             .overlay(RoundedRectangle(cornerRadius: roundCorners)
                 .stroke(LinearGradient(gradient: Gradient(colors: [gradientFirstColor, gradientSecondColor]), startPoint: .topLeading, endPoint: .bottomTrailing), lineWidth: 2))
-            .tint(.white)
+            .tint(.gray)
     }
 }

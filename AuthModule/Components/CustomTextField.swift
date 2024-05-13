@@ -23,14 +23,14 @@ struct CustomTextField: View {
                     .font(.system(size: 16,weight: .regular))
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.gray)
                     .modifier(TextFieldModifier(roundCorners: 10, gradientFirstColor: Color("CustomPink"), gradientSecondColor: Color("CustomGreen")))
             } else{
                 TextField(placeHolder, text: $text)
                     .font(.system(size: 16,weight: .regular))
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.gray)
                     .modifier(TextFieldModifier(roundCorners: 10, gradientFirstColor: Color("CustomPink"), gradientSecondColor: Color("CustomGreen")))
             }
         }

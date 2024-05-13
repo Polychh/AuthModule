@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State var email: String
-    @State var password: String
+    @State var email: String = .init()
+    @State var password: String = .init()
+    @EnvironmentObject var viewModel: AuthViewModel
     var body: some View {
         NavigationStack{
             VStack(alignment: .center, spacing: 16){
@@ -18,8 +19,12 @@ struct LoginView: View {
                 CustomTextField(text: $password, isSecureField: true, placeHolder: "Enter password", promptTitle: "Password")
                 
                 CustomButton(action: {
-                    print("Done")
+                    Task{
+                        try await viewModel.signIn(email: email, password: password)
+                    }
                 }, title: "SIGN IN")
+                .disabled(!isValid)
+                .opacity(isValid ? 1 : 0.7)
                 .padding(.top, 12)
                 
                 Spacer()
@@ -35,7 +40,13 @@ struct LoginView: View {
         }
     }
 }
+// MARK: - Validation TextFields
+extension LoginView: ValidationProtocol{
+    var isValid: Bool {
+        return !email.isEmpty && password.count > 6 && email.contains("@")
+    }
+}
 
 #Preview {
-    LoginView(email: "", password: "")
+    LoginView()
 }
