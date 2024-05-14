@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State var email: String = .init()
-    @State var password: String = .init()
+    @State private var email: String = .init()
+    @State private var password: String = .init()
+    @State private var showingSheet = false
+    @State private var showAlert = false
+    @State private var alertMessage: String = .init()
+    @State private var isViewVisible = false
     @EnvironmentObject var viewModel: AuthViewModel
     var body: some View {
         NavigationStack{
@@ -18,22 +22,30 @@ struct LoginView: View {
                 CustomTextField(text: $email, isSecureField: false, placeHolder: "Enter email", promptTitle: "Email Address")
                 CustomTextField(text: $password, isSecureField: true, placeHolder: "Enter password", promptTitle: "Password")
                 
+                HStack{
+                    Spacer()
+                    Button {
+                        showingSheet.toggle()
+                    } label: {
+                        ButtonLinkView(title: "Forgot password?", subTitle: "Press", textSize: 14)
+                    }
+                    .sheet(isPresented: $showingSheet) {
+                        ResetPasswordView()
+                    }
+                }
+                
                 CustomButton(action: {
                     Task{
                         try await viewModel.signIn(email: email, password: password)
                     }
-                }, title: "SIGN IN")
+                }, title: "SIGN IN", isAddImage: true)
                 .disabled(!isValid)
-                .opacity(isValid ? 1 : 0.7)
+                .opacity(isValid ? 1 : 0.9)
                 .padding(.top, 12)
                 
                 GoogleButton {
                     Task{
-                        do{
-                            try await viewModel.signInWithGoogle()
-                        }catch{
-                            print("Error google sign in \(error.localizedDescription)")
-                        }
+                        try await viewModel.signInWithGoogle()
                     }
                 }
                 
@@ -45,10 +57,25 @@ struct LoginView: View {
                     SignUpView()
                         .navigationBarBackButtonHidden(true)
                 } label: {
-                    ButtonLinkView(title: "Do not have an account?", subTitle: "Sign Up")
+                    ButtonLinkView(title: "Do not have an account?", subTitle: "Sign Up", textSize: 18)
                 }
             }
             .padding(.horizontal, 16)
+            .onAppear {
+                isViewVisible = true
+            }
+            .onDisappear {
+                isViewVisible = false
+            }
+            .onReceive(viewModel.$errorMessage, perform: { error in
+                if let error, isViewVisible{
+                    alertMessage = error
+                    showAlert = true
+                }
+            })
+            .alert(alertMessage, isPresented: $showAlert) {
+                Button("OK", role: .cancel) { }
+            }
         }
     }
 }

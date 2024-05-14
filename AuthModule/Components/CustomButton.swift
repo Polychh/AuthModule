@@ -10,6 +10,7 @@ import SwiftUI
 struct CustomButton: View {
     let action: () -> Void
     let title: String
+    let isAddImage: Bool
     
     var body: some View {
         VStack{
@@ -18,7 +19,9 @@ struct CustomButton: View {
             } label: {
                 HStack(alignment: .center, spacing: 5){
                     Text(title)
-                    Image(systemName: "arrow.right")
+                    if isAddImage{
+                        Image(systemName: "arrow.right")
+                    }
                 }
                 .fontWeight(.bold)
                 .foregroundColor(.gray)
@@ -32,8 +35,4 @@ struct CustomButton: View {
 }
 
 
-#Preview {
-    CustomButton(action: {
-        print("Done")
-    }, title: "Go")
-}
+

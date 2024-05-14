@@ -10,6 +10,7 @@ import SwiftUI
 struct ButtonLinkView: View {
     let title: String
     let subTitle: String
+    let textSize: CGFloat
     var body: some View {
         HStack(alignment: .center, spacing: 2){
             Text(title)
@@ -17,7 +18,7 @@ struct ButtonLinkView: View {
             Text(subTitle)
                 .fontWeight(.bold)
         }
-        .font(.title3)
+        .font(.system(size: textSize))
         .foregroundStyle(.gray)
     }
 }

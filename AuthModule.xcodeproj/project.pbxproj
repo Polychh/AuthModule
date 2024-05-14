@@ -54,6 +54,7 @@
 		362DFD562BF2A8E800BACAA5 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 362DFD552BF2A8E800BACAA5 /* GoogleSignInSwift */; };
 		364E47F22BF33D010016DA10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E47F12BF33D010016DA10 /* AppDelegate.swift */; };
 		364E47F42BF33EC60016DA10 /* String + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E47F32BF33EC60016DA10 /* String + ext.swift */; };
+		364E47F62BF3897A0016DA10 /* ResetPasswrodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E47F52BF3897A0016DA10 /* ResetPasswrodView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		362DFD572BF2A96300BACAA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		364E47F12BF33D010016DA10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		364E47F32BF33EC60016DA10 /* String + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + ext.swift"; sourceTree = "<group>"; };
+		364E47F52BF3897A0016DA10 /* ResetPasswrodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswrodView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 				362DFCE52BF20D3F00BACAA5 /* LoginView.swift */,
 				362DFCFA2BF23DA800BACAA5 /* SignUpView.swift */,
 				362DFD482BF27E1300BACAA5 /* SuccessView.swift */,
+				364E47F52BF3897A0016DA10 /* ResetPasswrodView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				364E47F62BF3897A0016DA10 /* ResetPasswrodView.swift in Sources */,
 				364E47F42BF33EC60016DA10 /* String + ext.swift in Sources */,
 				362DFD002BF2495D00BACAA5 /* Users.swift in Sources */,
 				362DFD4B2BF284F000BACAA5 /* RootView.swift in Sources */,

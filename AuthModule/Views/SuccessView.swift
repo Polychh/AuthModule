@@ -16,10 +16,15 @@ struct SuccessView: View {
                 UserInfoView(placeHolder: "Email", text: user.email)
                 CustomButton(action: {
                     viewModel.signOut()
-                }, title: "SIGN OUT")
+                }, title: "SIGN OUT", isAddImage: true)
                 .padding(.top, 8)
             }
             .padding(.horizontal, 16)
+        }else {
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle())
+                .foregroundStyle(.customGreen)
+                .padding(.horizontal, 16)
         }
     }
 }
