@@ -22,6 +22,7 @@ final class AuthViewModel: ObservableObject{
     @Published var googleSession: GIDGoogleUser?
     @Published var user: User?
     
+    
     init(){
         self.session = Auth.auth().currentUser
         Task{
@@ -42,6 +43,7 @@ final class AuthViewModel: ObservableObject{
     func signUp(email: String, password: String, nickName: String) async throws{
         do{
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
+            sendVerificationEmail()
             self.session = result.user
             let user = User(id: result.user.uid, nickName: nickName, email: email)
             let encodedUser = try Firestore.Encoder().encode(user)
@@ -100,5 +102,21 @@ final class AuthViewModel: ObservableObject{
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
         self.user = try? snapshot.data(as: User.self)
+    }
+    
+    private func sendVerificationEmail() {
+        guard let user = Auth.auth().currentUser else { return}
+        
+        if user.isEmailVerified {
+            print("User's email is already verified.")
+            return
+        }
+        
+        user.sendEmailVerification { error in
+            if let error = error {
+                print("Error sending email verification: \(error.localizedDescription)")
+                return
+            }
+        }
     }
 }
