@@ -27,6 +27,18 @@ struct LoginView: View {
                 .opacity(isValid ? 1 : 0.7)
                 .padding(.top, 12)
                 
+                GoogleButton {
+                    Task{
+                        do{
+                            try await viewModel.signInWithGoogle()
+                        }catch{
+                            print("Error google sign in \(error.localizedDescription)")
+                        }
+                    }
+                }
+                
+                .padding(.top, 24)
+                
                 Spacer()
             
                 NavigationLink {

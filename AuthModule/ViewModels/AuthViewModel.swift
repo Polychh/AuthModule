@@ -9,6 +9,8 @@ import Foundation
 import FirebaseFirestore
 import FirebaseAuth
 import FirebaseFirestoreSwift
+import FirebaseCore
+import GoogleSignIn
 
 protocol ValidationProtocol{
     var isValid: Bool { get }
@@ -17,6 +19,7 @@ protocol ValidationProtocol{
 @MainActor
 final class AuthViewModel: ObservableObject{
     @Published var session: FirebaseAuth.User?
+    @Published var googleSession: GIDGoogleUser?
     @Published var user: User?
     
     init(){
@@ -36,7 +39,6 @@ final class AuthViewModel: ObservableObject{
         }
     }
     
-  
     func signUp(email: String, password: String, nickName: String) async throws{
         do{
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
@@ -50,19 +52,53 @@ final class AuthViewModel: ObservableObject{
         }
     }
     
-    private func getUser() async{
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
-        self.user = try? snapshot.data(as: User.self)
+    func signInWithGoogle() async throws{
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        
+        // Configuration object.
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+        
+        //Get RootView
+        let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        guard let rootViewController = scene?.windows.first?.rootViewController else { return }
+        
+        //Authentication response
+        let result = try await GIDSignIn.sharedInstance.signIn( withPresenting: rootViewController)
+        let user = result.user
+        guard let idToken = user.idToken?.tokenString else {
+            throw "Unexpected error occurred, please retry"
+        }
+        
+        //Firebase auth
+        let credential = GoogleAuthProvider.credential( withIDToken: idToken, accessToken: user.accessToken.tokenString)
+        let authResult = try await Auth.auth().signIn(with: credential)
+        self.session = authResult.user
+        
+        // Save userInfo in db
+        let userInfo = User(id: authResult.user.uid, nickName: authResult.user.email ?? "", email: authResult.user.email ?? "")
+        let encodedUser = try Firestore.Encoder().encode(userInfo)
+        try await Firestore.firestore().collection("users").document(userInfo.id).setData(encodedUser)
+        await getUser()
     }
     
-    func signOut(){
-        do{
+    func signOut() {
+        do {
+            // Check if the user is signed in with Google
+            if let _ = GIDSignIn.sharedInstance.currentUser {
+                GIDSignIn.sharedInstance.signOut()
+            }
             try Auth.auth().signOut()
             self.session = nil
             self.user = nil
         } catch {
             print("Sign Out Error \(error.localizedDescription)")
         }
+    }
+    
+    private func getUser() async{
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
+        self.user = try? snapshot.data(as: User.self)
     }
 }

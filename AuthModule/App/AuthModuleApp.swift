@@ -7,6 +7,8 @@
 
 import SwiftUI
 import FirebaseCore
+import FirebaseAuth
+import GoogleSignIn
 
 @main
 struct AuthModuleApp: App {
@@ -21,11 +23,3 @@ struct AuthModuleApp: App {
     }
 }
 
-class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-
-    return true
-  }
-}
