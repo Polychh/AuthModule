@@ -19,18 +19,20 @@ struct LoginView: View {
         NavigationStack{
             VStack(alignment: .center, spacing: 16){
                 Spacer()
-                CustomTextField(text: $email, isSecureField: false, placeHolder: "Enter email", promptTitle: "Email Address")
-                CustomTextField(text: $password, isSecureField: true, placeHolder: "Enter password", promptTitle: "Password")
+                CustomTextField(text: $email, isSecureField: false, placeHolder: "Enter email", promptTitle: "Email Address", errorMessage: nil)
+                CustomTextField(text: $password, isSecureField: true, placeHolder: "Enter password", promptTitle: "Password", errorMessage: nil)
                 
                 HStack{
                     Spacer()
                     Button {
+                        viewModel.errorMessage = nil
+                        isViewVisible = false
                         showingSheet.toggle()
                     } label: {
                         ButtonLinkView(title: "Forgot password?", subTitle: "Press", textSize: 14)
                     }
                     .sheet(isPresented: $showingSheet) {
-                        ResetPasswordView()
+                        ResetPasswordView(isVisibleLogIn: $isViewVisible)
                     }
                 }
                 
@@ -58,6 +60,7 @@ struct LoginView: View {
                         .navigationBarBackButtonHidden(true)
                 } label: {
                     ButtonLinkView(title: "Do not have an account?", subTitle: "Sign Up", textSize: 18)
+                        .padding(.bottom, 8)
                 }
             }
             .padding(.horizontal, 16)
@@ -86,6 +89,3 @@ extension LoginView: ValidationProtocol{
     }
 }
 
-#Preview {
-    LoginView()
-}

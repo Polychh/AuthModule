@@ -110,7 +110,6 @@ final class AuthViewModel: ObservableObject{
             try await Auth.auth().sendPasswordReset(withEmail: email)
             updatePassword = true
         } catch {
-            print("UPDATE")
             errorMessage = error.localizedDescription
         }
        

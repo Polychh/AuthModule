@@ -55,6 +55,9 @@
 		364E47F22BF33D010016DA10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E47F12BF33D010016DA10 /* AppDelegate.swift */; };
 		364E47F42BF33EC60016DA10 /* String + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E47F32BF33EC60016DA10 /* String + ext.swift */; };
 		364E47F62BF3897A0016DA10 /* ResetPasswrodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E47F52BF3897A0016DA10 /* ResetPasswrodView.swift */; };
+		364E47FA2BF3D93C0016DA10 /* ConformPasswordImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E47F92BF3D93C0016DA10 /* ConformPasswordImage.swift */; };
+		364E47FC2BF52EE00016DA10 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E47FB2BF52EE00016DA10 /* SignUpViewModel.swift */; };
+		364E47FE2BF52F5D0016DA10 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E47FD2BF52F5D0016DA10 /* Regex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +82,9 @@
 		364E47F12BF33D010016DA10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		364E47F32BF33EC60016DA10 /* String + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + ext.swift"; sourceTree = "<group>"; };
 		364E47F52BF3897A0016DA10 /* ResetPasswrodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswrodView.swift; sourceTree = "<group>"; };
+		364E47F92BF3D93C0016DA10 /* ConformPasswordImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConformPasswordImage.swift; sourceTree = "<group>"; };
+		364E47FB2BF52EE00016DA10 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		364E47FD2BF52F5D0016DA10 /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +177,7 @@
 				362DFCFC2BF2403300BACAA5 /* ButtonLinkView.swift */,
 				362DFD4C2BF286D500BACAA5 /* UserInfoView.swift */,
 				362DFD4E2BF2A30D00BACAA5 /* GoogleButton.swift */,
+				364E47F92BF3D93C0016DA10 /* ConformPasswordImage.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -208,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				362DFD0F2BF24F6A00BACAA5 /* AuthViewModel.swift */,
+				364E47FB2BF52EE00016DA10 /* SignUpViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -216,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				364E47F32BF33EC60016DA10 /* String + ext.swift */,
+				364E47FD2BF52F5D0016DA10 /* Regex.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -330,13 +339,16 @@
 				364E47F42BF33EC60016DA10 /* String + ext.swift in Sources */,
 				362DFD002BF2495D00BACAA5 /* Users.swift in Sources */,
 				362DFD4B2BF284F000BACAA5 /* RootView.swift in Sources */,
+				364E47FC2BF52EE00016DA10 /* SignUpViewModel.swift in Sources */,
 				362DFCF72BF2323800BACAA5 /* CustomButton.swift in Sources */,
 				364E47F22BF33D010016DA10 /* AppDelegate.swift in Sources */,
 				362DFD4D2BF286D500BACAA5 /* UserInfoView.swift in Sources */,
 				362DFD492BF27E1400BACAA5 /* SuccessView.swift in Sources */,
+				364E47FA2BF3D93C0016DA10 /* ConformPasswordImage.swift in Sources */,
 				362DFD4F2BF2A30E00BACAA5 /* GoogleButton.swift in Sources */,
 				362DFCE62BF20D3F00BACAA5 /* LoginView.swift in Sources */,
 				362DFCE42BF20D3F00BACAA5 /* AuthModuleApp.swift in Sources */,
+				364E47FE2BF52F5D0016DA10 /* Regex.swift in Sources */,
 				362DFCF52BF22DBD00BACAA5 /* TextFieldModifier.swift in Sources */,
 				362DFCFD2BF2403300BACAA5 /* ButtonLinkView.swift in Sources */,
 				362DFCFB2BF23DA800BACAA5 /* SignUpView.swift in Sources */,

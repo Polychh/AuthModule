@@ -25,13 +25,22 @@ struct CustomButton: View {
                 }
                 .fontWeight(.bold)
                 .foregroundColor(.gray)
-                .frame(width: UIScreen.main.bounds.width - 64, height: 30 )
+                .frame(maxWidth: .infinity, maxHeight: 35)
+               
             }
             .buttonBorderShape(.roundedRectangle)
             .buttonStyle(.borderedProminent)
-            .tint(Color("CustomGreen")).opacity(0.9)
+            .tint(Color("CustomGreen"))
+            
         }
+        
     }
+}
+
+#Preview {
+    CustomButton(action: {
+        print("Done")
+    }, title: "Press me", isAddImage: true)
 }
 
 

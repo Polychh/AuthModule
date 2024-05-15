@@ -12,12 +12,13 @@ struct ResetPasswordView: View {
     @State private var showAlert = false
     @State private var showAlertError = false
     @State private var alertMessage: String = .init()
+    @Binding var isVisibleLogIn: Bool
     @EnvironmentObject var viewModel: AuthViewModel
     @Environment(\.dismiss) var dismiss
     @State private var isViewVisible = false
     var body: some View {
         VStack(alignment: .center, spacing: 16){
-            CustomTextField(text: $email, isSecureField: false, placeHolder: "Enter email to reset Passwod", promptTitle: "Email Address")
+            CustomTextField(text: $email, isSecureField: false, placeHolder: "Enter email to reset Passwod", promptTitle: "Email Address", errorMessage: nil)
             CustomButton(action: {
                 Task{
                     try await viewModel.updatePassword(email: email)
@@ -37,20 +38,23 @@ struct ResetPasswordView: View {
             }
         }
         .onAppear {
-            viewModel.errorMessage = nil
+//            viewModel.errorMessage = nil
             isViewVisible = true
         }
         .onDisappear {
             isViewVisible = false
             viewModel.errorMessage = nil
+            isVisibleLogIn = true
         }
         .onReceive(viewModel.$errorMessage, perform: { error in
             if let error, isViewVisible{
+                print("ERROR HAPPEN")
                 alertMessage = error
                 showAlertError = true
-            }else{
-                showAlertError = false
             }
+//            else{
+//                showAlertError = false
+//            }
         })
         .alert(alertMessage, isPresented: $showAlert) {
             Button("OK", role: .cancel) {

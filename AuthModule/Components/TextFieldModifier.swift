@@ -11,11 +11,12 @@ struct TextFieldModifier: ViewModifier {
     let roundCorners: CGFloat
     let gradientFirstColor: Color
     let gradientSecondColor: Color
+    let errorMessage: String?
 
     func body(content: Content) -> some View {
         content
             .padding()
-            .background(LinearGradient(gradient: Gradient(colors: [gradientFirstColor, gradientSecondColor]), startPoint: .topLeading, endPoint: .bottomTrailing))
+            .background(errorMessage == nil ? LinearGradient(gradient: Gradient(colors: [gradientFirstColor, gradientSecondColor]), startPoint: .topLeading, endPoint: .bottomTrailing).opacity(1.0) : LinearGradient(gradient: Gradient(colors: [.red, .orange]), startPoint: .topLeading, endPoint: .bottomTrailing).opacity(0.15))
             .cornerRadius(roundCorners)
             .padding(3)
             .overlay(RoundedRectangle(cornerRadius: roundCorners)

@@ -12,6 +12,7 @@ struct CustomTextField: View {
     let isSecureField: Bool
     let placeHolder: String
     let promptTitle: String
+    let errorMessage: String?
     var body: some View {
         VStack(alignment: .leading, spacing: 8){
             Text(promptTitle)
@@ -24,19 +25,25 @@ struct CustomTextField: View {
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .foregroundStyle(.gray)
-                    .modifier(TextFieldModifier(roundCorners: 10, gradientFirstColor: Color("CustomPink"), gradientSecondColor: Color("CustomGreen")))
+                    .modifier(TextFieldModifier(roundCorners: 10, gradientFirstColor: Color("CustomPink"), gradientSecondColor: Color("CustomGreen"), errorMessage: errorMessage))
+                    //.background(errorMessage == nil ? Color.white.opacity(0.1) : Color.red.opacity(0.15))
             } else{
                 TextField(placeHolder, text: $text)
                     .font(.system(size: 16,weight: .regular))
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .foregroundStyle(.gray)
-                    .modifier(TextFieldModifier(roundCorners: 10, gradientFirstColor: Color("CustomPink"), gradientSecondColor: Color("CustomGreen")))
+                    .modifier(TextFieldModifier(roundCorners: 10, gradientFirstColor: Color("CustomPink"), gradientSecondColor: Color("CustomGreen"), errorMessage: errorMessage))
+                    //.background(errorMessage == nil ? Color.white.opacity(0.0) : Color.red.opacity(0.15))
+            }
+            
+            if let errorMessage{
+                Text(errorMessage)
+                    .foregroundStyle(.red)
+                    .font(.caption)
+                    .padding(.horizontal, 5)
             }
         }
     }
 }
 
-#Preview {
-    CustomTextField(text: .constant(""), isSecureField: true, placeHolder: "Enter email", promptTitle: "Email Address")
-}
