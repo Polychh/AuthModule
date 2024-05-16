@@ -58,6 +58,7 @@
 		364E47FA2BF3D93C0016DA10 /* ConformPasswordImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E47F92BF3D93C0016DA10 /* ConformPasswordImage.swift */; };
 		364E47FC2BF52EE00016DA10 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E47FB2BF52EE00016DA10 /* SignUpViewModel.swift */; };
 		364E47FE2BF52F5D0016DA10 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E47FD2BF52F5D0016DA10 /* Regex.swift */; };
+		364E48002BF6457B0016DA10 /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E47FF2BF6457B0016DA10 /* LogInViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		364E47F92BF3D93C0016DA10 /* ConformPasswordImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConformPasswordImage.swift; sourceTree = "<group>"; };
 		364E47FB2BF52EE00016DA10 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		364E47FD2BF52F5D0016DA10 /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
+		364E47FF2BF6457B0016DA10 /* LogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 			children = (
 				362DFD0F2BF24F6A00BACAA5 /* AuthViewModel.swift */,
 				364E47FB2BF52EE00016DA10 /* SignUpViewModel.swift */,
+				364E47FF2BF6457B0016DA10 /* LogInViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				364E47FE2BF52F5D0016DA10 /* Regex.swift in Sources */,
 				362DFCF52BF22DBD00BACAA5 /* TextFieldModifier.swift in Sources */,
 				362DFCFD2BF2403300BACAA5 /* ButtonLinkView.swift in Sources */,
+				364E48002BF6457B0016DA10 /* LogInViewModel.swift in Sources */,
 				362DFCFB2BF23DA800BACAA5 /* SignUpView.swift in Sources */,
 				362DFCF32BF221F800BACAA5 /* CustomTextField.swift in Sources */,
 				362DFD102BF24F6A00BACAA5 /* AuthViewModel.swift in Sources */,
@@ -495,6 +499,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -524,6 +529,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

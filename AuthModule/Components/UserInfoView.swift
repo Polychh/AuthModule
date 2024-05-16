@@ -23,6 +23,3 @@ struct UserInfoView: View {
     }
 }
 
-#Preview {
-    UserInfoView(placeHolder: "NickName", text: "Polych")
-}

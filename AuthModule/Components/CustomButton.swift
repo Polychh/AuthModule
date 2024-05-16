@@ -25,7 +25,7 @@ struct CustomButton: View {
                 }
                 .fontWeight(.bold)
                 .foregroundColor(.gray)
-                .frame(maxWidth: .infinity, maxHeight: 35)
+                .frame(maxWidth: .infinity, minHeight: 35, maxHeight: 35)
                
             }
             .buttonBorderShape(.roundedRectangle)

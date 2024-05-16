@@ -8,20 +8,46 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var email: String = .init()
-    @State private var password: String = .init()
+    enum FocusedField {
+        case email, password
+    }
     @State private var showingSheet = false
     @State private var showAlert = false
     @State private var alertMessage: String = .init()
     @State private var isViewVisible = false
+    @StateObject var viewModelValid = LogInViewModel()
+    @FocusState private var focusedField: FocusedField?
     @EnvironmentObject var viewModel: AuthViewModel
     var body: some View {
         NavigationStack{
             VStack(alignment: .center, spacing: 16){
                 Spacer()
-                CustomTextField(text: $email, isSecureField: false, placeHolder: "Enter email", promptTitle: "Email Address", errorMessage: nil)
-                CustomTextField(text: $password, isSecureField: true, placeHolder: "Enter password", promptTitle: "Password", errorMessage: nil)
-                
+                VStack(spacing: 16){
+                    CustomTextField(text: $viewModelValid.email, isSecureField: false, placeHolder: "Enter email", promptTitle: "Email Address", errorMessage: viewModelValid.emailPrompt)
+                        .focused($focusedField, equals: .email)
+                        .submitLabel(.next)
+                        .onChange(of: viewModelValid.email) { _ in
+                            print("Done")
+                            viewModelValid.emailEndEditing = false
+                        }
+                    CustomTextField(text:  $viewModelValid.password, isSecureField: true, placeHolder: "Enter password", promptTitle: "Password", errorMessage: viewModelValid.passwordPrompt)
+                        .focused($focusedField, equals: .password)
+                        .submitLabel(.done)
+                        .onChange(of: viewModelValid.password) { _ in
+                            print("Done 1")
+                            viewModelValid.passwordEndEding = false
+                        }
+                }
+                .onSubmit {
+                    if focusedField == .email {
+                        focusedField = .password
+                        viewModelValid.emailEndEditing = true
+                    } else if focusedField == .password {
+                        viewModelValid.passwordEndEding = true
+                        focusedField = nil
+                    }
+                }
+              
                 HStack{
                     Spacer()
                     Button {
@@ -38,11 +64,10 @@ struct LoginView: View {
                 
                 CustomButton(action: {
                     Task{
-                        try await viewModel.signIn(email: email, password: password)
+                        try await viewModel.signIn(email: viewModelValid.email, password: viewModelValid.password)
                     }
                 }, title: "SIGN IN", isAddImage: true)
-                .disabled(!isValid)
-                .opacity(isValid ? 1 : 0.9)
+                .disabled(!viewModelValid.canSubmit)
                 .padding(.top, 12)
                 
                 GoogleButton {
@@ -70,6 +95,7 @@ struct LoginView: View {
             .onDisappear {
                 isViewVisible = false
             }
+
             .onReceive(viewModel.$errorMessage, perform: { error in
                 if let error, isViewVisible{
                     alertMessage = error
@@ -82,10 +108,5 @@ struct LoginView: View {
         }
     }
 }
-// MARK: - Validation TextFields
-extension LoginView: ValidationProtocol{
-    var isValid: Bool {
-        return !email.isEmpty && password.count > 6 && email.contains("@")
-    }
-}
+
 

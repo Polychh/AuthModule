@@ -42,13 +42,15 @@ final class SignUpViewModel: ObservableObject{
         }
     }
     
-    init(){
-        validateRegInfo()
-    }
     
     private var anyCancellable: [AnyCancellable] = []
     private let emailPredicate = NSPredicate(format: "SELF MATCHES %@", Regex.email.rawValue)
     
+    
+    init(){
+        validateRegInfo()
+    }
+
     private func validateRegInfo(){
         $email
             .debounce(for: 0.5, scheduler: RunLoop.main)
