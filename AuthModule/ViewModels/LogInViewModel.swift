@@ -22,11 +22,11 @@ final class LogInViewModel: ObservableObject{
     private let emailPredicate = NSPredicate(format: "SELF MATCHES %@", Regex.email.rawValue)
     
     var emailPrompt: String? {
-        isValidProperty(isValid: isValidEmail, prompt: "Email incorrect, example test@tet.com", value: email)
+        isValidProperty(isValid: isValidEmail, prompt: "Email incorrect, example test@tet.com")
     }
     
     var passwordPrompt: String? {
-        isValidProperty(isValid: isValidPassword, prompt: "Password incorrect,should be more than 5 symbol", value: password)
+        isValidProperty(isValid: isValidPassword, prompt: "Password incorrect,should be more than 5 symbol")
     }
     
     init(){
@@ -70,7 +70,7 @@ final class LogInViewModel: ObservableObject{
             .store(in: &anyCancellable)
     }
     
-    private func isValidProperty( isValid: Bool, prompt: String, value: String) -> String?{
+    private func isValidProperty( isValid: Bool, prompt: String) -> String?{
         if isValid == true {
             return nil
         } else {

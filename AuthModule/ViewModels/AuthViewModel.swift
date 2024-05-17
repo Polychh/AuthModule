@@ -12,10 +12,6 @@ import FirebaseFirestoreSwift
 import FirebaseCore
 import GoogleSignIn
 
-protocol ValidationProtocol{
-    var isValid: Bool { get }
-}
-
 @MainActor
 final class AuthViewModel: ObservableObject{
     @Published var session: FirebaseAuth.User?

@@ -8,24 +8,34 @@
 import SwiftUI
 
 struct ResetPasswordView: View {
-    @State private var email: String = .init()
+    //@State private var email: String = .init()
     @State private var showAlert = false
     @State private var showAlertError = false
     @State private var alertMessage: String = .init()
-    @Binding var isVisibleLogIn: Bool
+    @State private var isViewVisible = false
+    //@Binding var isVisibleLogIn: Bool
+    //@FocusState private var focusedField: Bool
+    @StateObject var viewModelValid = ResetViewModel()
     @EnvironmentObject var viewModel: AuthViewModel
     @Environment(\.dismiss) var dismiss
-    @State private var isViewVisible = false
+    
     var body: some View {
         VStack(alignment: .center, spacing: 16){
-            CustomTextField(text: $email, isSecureField: false, placeHolder: "Enter email to reset Passwod", promptTitle: "Email Address", errorMessage: nil)
+            CustomTextField(text: $viewModelValid.email, isSecureField: false, placeHolder: "Enter email to reset Passwod", promptTitle: "Email Address", errorMessage: viewModelValid.emailPrompt)
+                //.focused($focusedField)
+                .submitLabel(.done)
+                .onChange(of: viewModelValid.email) { _ in
+                    viewModelValid.emailEndEditing = false
+                }
+                .onSubmit {
+                    viewModelValid.emailEndEditing = true
+                }
             CustomButton(action: {
                 Task{
-                    try await viewModel.updatePassword(email: email)
+                    try await viewModel.updatePassword(email: viewModelValid.email)
                 }
             }, title: "Reset Password", isAddImage: false)
-            .disabled(!isValid)
-            .opacity(isValid ? 1 : 0.7)
+            .disabled(!viewModelValid.canSubmit)
             .padding(.top, 12)
             Spacer()
         }
@@ -44,7 +54,7 @@ struct ResetPasswordView: View {
         .onDisappear {
             isViewVisible = false
             viewModel.errorMessage = nil
-            isVisibleLogIn = true
+            //isVisibleLogIn = true
         }
         .onReceive(viewModel.$errorMessage, perform: { error in
             if let error, isViewVisible{
@@ -67,10 +77,4 @@ struct ResetPasswordView: View {
     }
 }
 
-// MARK: - Validation TextFields
-extension ResetPasswordView: ValidationProtocol{
-    var isValid: Bool {
-        return !email.isEmpty
-    }
-}
 

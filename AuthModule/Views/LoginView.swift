@@ -27,14 +27,12 @@ struct LoginView: View {
                         .focused($focusedField, equals: .email)
                         .submitLabel(.next)
                         .onChange(of: viewModelValid.email) { _ in
-                            print("Done")
                             viewModelValid.emailEndEditing = false
                         }
                     CustomTextField(text:  $viewModelValid.password, isSecureField: true, placeHolder: "Enter password", promptTitle: "Password", errorMessage: viewModelValid.passwordPrompt)
                         .focused($focusedField, equals: .password)
                         .submitLabel(.done)
                         .onChange(of: viewModelValid.password) { _ in
-                            print("Done 1")
                             viewModelValid.passwordEndEding = false
                         }
                 }
@@ -58,7 +56,7 @@ struct LoginView: View {
                         ButtonLinkView(title: "Forgot password?", subTitle: "Press", textSize: 14)
                     }
                     .sheet(isPresented: $showingSheet) {
-                        ResetPasswordView(isVisibleLogIn: $isViewVisible)
+                        ResetPasswordView()
                     }
                 }
                 
