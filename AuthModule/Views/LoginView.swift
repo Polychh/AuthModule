@@ -19,7 +19,7 @@ struct LoginView: View {
     @FocusState private var focusedField: FocusedField?
     @EnvironmentObject var viewModel: AuthViewModel
     var body: some View {
-        NavigationStack{
+        //NavigationStack{
             VStack(alignment: .center, spacing: 16){
                 Spacer()
                 VStack(spacing: 16){
@@ -103,7 +103,7 @@ struct LoginView: View {
             .alert(alertMessage, isPresented: $showAlert) {
                 Button("OK", role: .cancel) { }
             }
-        }
+       // }
     }
 }
 

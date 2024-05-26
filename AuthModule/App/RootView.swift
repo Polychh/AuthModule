@@ -10,9 +10,9 @@ import SwiftUI
 struct RootView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     var body: some View {
-        Group {
+        NavigationStack {
             if viewModel.session != nil {
-                SuccessView()
+                PhotoView()
             } else {
                 LoginView()
             }

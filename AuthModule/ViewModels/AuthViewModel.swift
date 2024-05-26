@@ -113,8 +113,10 @@ final class AuthViewModel: ObservableObject{
     
     private func getUser() async{
         guard let uid = Auth.auth().currentUser?.uid else { return }
+        print("uid \(uid)")
         guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
         self.user = try? snapshot.data(as: User.self)
+        print(user)
     }
     
     private func sendVerificationEmail() {
